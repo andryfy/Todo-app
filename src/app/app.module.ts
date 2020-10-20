@@ -21,6 +21,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import { AlertRemoveComponent } from './dialog/alert-remove/alert-remove.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AboutSectionComponent } from './components/about-section/about-section.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HttpClientModule} from '@angular/common/http';
     CreateTaskComponent,
     ListTaskComponent,
     DetailsTaskComponent,
-    AlertRemoveComponent
+    AlertRemoveComponent,
+    AboutSectionComponent
   ],
   imports: [
     BrowserModule,

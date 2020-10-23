@@ -10,15 +10,8 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  arrayOfTask: any;
-  allTask: any;
+  allTask: Task[] = [];
   editMe: Task;
-
-  pageSize = 10;
-  currentPage = 0;
-  totalSize = 0;
-
-   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private todoService: TodoService) {
   }
@@ -29,22 +22,11 @@ export class HomeComponent implements OnInit {
     this.todoService.getTasks().subscribe(
       response => {
         console.log(response);
-        this.allTask = new MatTableDataSource<Task>(response);
-        this.allTask.paginator = this.paginator;
-        this.arrayOfTask = response;
-        this.totalSize = this.arrayOfTask.length;
-        this.iterator();
+        this.allTask = response.reverse();
       },
       error => {
         console.log('Get all tasks error: ', error);
       });
-  }
-
-  private iterator() {
-    const end = (this.currentPage + 1) * this.pageSize;
-    const start = this.currentPage * this.pageSize;
-    const part = this.arrayOfTask.slice(start, end);
-    this.allTask = part;
   }
 
   onAdd(newTask: Task): void {

@@ -5,14 +5,11 @@
 </app-create-task>
 
 <app-list-task
+  *ngIf="allTask.length"
   [tasks]="allTask"
   (doneEvent)="onDone($event)"
   (deleteEvent)="onDelete($event.id)"
   (editEvent)="onEdit($event)"
-  [pageSize]="pageSize"
-  [currentPage]="currentPage"
-  [totalSize]="totalSize"
-  [arrayOfTask]="arrayOfTask"
 >
 
 </app-list-task>

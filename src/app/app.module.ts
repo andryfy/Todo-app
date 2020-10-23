@@ -22,6 +22,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { AlertRemoveComponent } from './dialog/alert-remove/alert-remove.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AboutSectionComponent } from './components/about-section/about-section.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { AboutSectionComponent } from './components/about-section/about-section.
     MatTableModule,
     MatDialogModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

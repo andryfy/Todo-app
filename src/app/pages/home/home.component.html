@@ -1,2 +1,18 @@
-<app-create-task (addEvent)="onAdd($event)" (editEvent)="handleEdit($event)" [toEdit]="editMe"></app-create-task>
-<app-list-task [tasks]="allTask" (doneEvent)="onDone($event)" (deleteEvent)="onDelete($event.id)" (editEvent)="onEdit($event)"></app-list-task>
+<app-create-task
+  (addEvent)="onAdd($event)"
+  (editEvent)="handleEdit($event)"
+  [toEdit]="editMe">
+</app-create-task>
+
+<app-list-task
+  [tasks]="allTask"
+  (doneEvent)="onDone($event)"
+  (deleteEvent)="onDelete($event.id)"
+  (editEvent)="onEdit($event)"
+  [pageSize]="pageSize"
+  [currentPage]="currentPage"
+  [totalSize]="totalSize"
+  [arrayOfTask]="arrayOfTask"
+>
+
+</app-list-task>

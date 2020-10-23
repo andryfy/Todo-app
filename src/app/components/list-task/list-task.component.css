@@ -1,5 +1,10 @@
+.mat-elevation-z8{
+  width: 70%;
+  margin: auto;
+}
+
 table {
   margin-top: 20px;
-  width: 70%;
+  width: 100%;
   margin: auto;
 }

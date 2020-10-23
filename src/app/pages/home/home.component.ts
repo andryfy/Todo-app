@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Task} from '../../models/Task';
 import {TodoService} from '../../services/todo.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +10,15 @@ import {TodoService} from '../../services/todo.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  allTask: Array<Task> = [];
+  arrayOfTask: any;
+  allTask: any;
   editMe: Task;
+
+  pageSize = 10;
+  currentPage = 0;
+  totalSize = 0;
+
+   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private todoService: TodoService) {
   }
@@ -20,11 +29,22 @@ export class HomeComponent implements OnInit {
     this.todoService.getTasks().subscribe(
       response => {
         console.log(response);
-        this.allTask = response;
+        this.allTask = new MatTableDataSource<Task>(response);
+        this.allTask.paginator = this.paginator;
+        this.arrayOfTask = response;
+        this.totalSize = this.arrayOfTask.length;
+        this.iterator();
       },
       error => {
         console.log('Get all tasks error: ', error);
       });
+  }
+
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.arrayOfTask.slice(start, end);
+    this.allTask = part;
   }
 
   onAdd(newTask: Task): void {

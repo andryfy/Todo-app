@@ -15,6 +15,12 @@ export class ListTaskComponent implements OnInit {
   @Output() doneEvent: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() editEvent: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() deleteEvent: EventEmitter<Task> = new EventEmitter<Task>();
+
+  @Input() pageSize: any;
+  @Input() currentPage: any;
+  @Input() totalSize: any;
+  @Input() arrayOfTask: any;
+
   readonly moment = moment;
   displayedColumns: string[] = ['id', 'title', 'isDone', 'createdAt', 'doneAt', 'actions'];
 
@@ -22,6 +28,19 @@ export class ListTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.arrayOfTask.slice(start, end);
+    this.tasks = part;
   }
 
   done(task: Task) {

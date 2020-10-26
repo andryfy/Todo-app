@@ -20,7 +20,7 @@ export class ListTaskComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<any>();
 
   readonly moment = moment;
-  displayedColumns: string[] = ['id', 'title', 'isDone', 'createdAt', 'doneAt', 'actions'];
+  displayedColumns: string[] = ['selected','id', 'title', 'isDone', 'createdAt', 'doneAt', 'actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

@@ -3,6 +3,19 @@
     <mat-card-title style="text-align: center">My tasks</mat-card-title>
     <mat-card-content class="center">
       <section class="inputs">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>done</mat-icon>
+            <span>Done All</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>Remove All</span>
+          </button>
+        </mat-menu>
         <mat-form-field hintLabel="Max 50 characters">
           <mat-label>Title</mat-label>
           <input #input maxlength="50" placeholder="eg. Clean house" matInput required [ngModel]="toEdit?.title || formTask.title" (ngModelChange)="toEdit ? toEdit.title = $event : formTask.title = $event">

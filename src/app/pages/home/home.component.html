@@ -1,4 +1,5 @@
 <app-create-task
+  [selectedTasks]="selectedTask"
   (addEvent)="onAdd($event)"
   (editEvent)="handleEdit($event)"
   [toEdit]="editMe">
@@ -10,6 +11,7 @@
   (doneEvent)="onDone($event)"
   (deleteEvent)="onDelete($event.id)"
   (editEvent)="onEdit($event)"
+  (selectedTasksOut)=onChecked($event)
 >
 
 </app-list-task>

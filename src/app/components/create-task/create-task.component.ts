@@ -11,13 +11,14 @@ export class CreateTaskComponent implements OnInit {
   @Output() addEvent: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() editEvent: EventEmitter<Task> = new EventEmitter<Task>();
   @Input() toEdit: Task;
+  @Input() selectedTasks: Task[];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  addHandler() {
+  addHandler(): void {
     if (this.toEdit) {
       this.editEvent.emit(this.toEdit);
       this.toEdit = null;

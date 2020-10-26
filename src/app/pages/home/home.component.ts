@@ -12,6 +12,7 @@ import {MatPaginator} from '@angular/material/paginator';
 export class HomeComponent implements OnInit {
   allTask: Task[] = [];
   editMe: Task;
+  selectedTask: Task[] = [];
 
   constructor(private todoService: TodoService) {
   }
@@ -21,7 +22,6 @@ export class HomeComponent implements OnInit {
     // Mettre les donnees dans allTask
     this.todoService.getTasks().subscribe(
       response => {
-        console.log(response);
         this.allTask = response.reverse();
       },
       error => {
@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
   onAdd(newTask: Task): void {
     this.todoService.addTask(newTask).subscribe(
       response => {
-        console.log(response);
         this.allTask.push({...newTask, id: response.id, createdAt: new Date()});
         this.allTask = this.allTask.filter(x => true);
       }
@@ -70,4 +69,7 @@ export class HomeComponent implements OnInit {
     this.todoService.editTask(editedTask).subscribe();
   }
 
+  onChecked(event): void {
+    this.selectedTask = event;
+  }
 }

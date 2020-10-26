@@ -20,7 +20,9 @@ export class ListTaskComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<any>();
 
   readonly moment = moment;
-  displayedColumns: string[] = ['selected','id', 'title', 'isDone', 'createdAt', 'doneAt', 'actions'];
+  displayedColumns: string[] = ['selected', 'id', 'title', 'isDone', 'createdAt', 'doneAt', 'actions'];
+  selectedTasks: Task[] = [];
+  @Output() selectedTasksOut: EventEmitter<Task[]> = new EventEmitter<Task[]>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -30,16 +32,16 @@ export class ListTaskComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataSource.data = this.tasks;
   }
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  done(task: Task) {
+  done(task: Task): void {
     if (task.isDone) { return; }
     this.doneEvent.emit(task);
   }
 
-  remove(task: Task) {
+  remove(task: Task): void {
     const sub = this.dialog.open(AlertRemoveComponent, {data: task})
       .afterClosed().subscribe(confirm => {
         if (confirm) {
@@ -48,13 +50,20 @@ export class ListTaskComponent implements OnInit, AfterViewInit {
       }).add(() => sub.unsubscribe());
   }
 
-  edit(task: Task) {
+  edit(task: Task): void {
     this.editEvent.emit(task);
   }
 
-  showMore(task: Task) {
+  showMore(task: Task): void {
     this.dialog.open(DetailsTaskComponent, {
       data: task
     });
+  }
+
+  onChange(checked: boolean, task: Task): void {
+    if (checked) { this.selectedTasks.push(task); }
+    else { this.selectedTasks.splice(this.selectedTasks.indexOf(task), 1); }
+    console.log(this.selectedTasks);
+    this.selectedTasksOut.emit(this.selectedTasks);
   }
 }

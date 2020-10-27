@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Task} from '../../models/Task';
 import {TodoService} from '../../services/todo.service';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
